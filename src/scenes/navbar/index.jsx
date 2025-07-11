@@ -20,11 +20,11 @@ import {
   Menu,
   Close,
 } from "@mui/icons-material";
-<<<<<<< HEAD
+
 import { useDispatch } from "react-redux";
-=======
+
 import {  useDispatch } from "react-redux";
->>>>>>> a39336bf77e030087b4d05072d6375ebe79dbb7b
+
 import { setMode, setLogout } from "../../state/index.js";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "../../components/FlexBetween";
