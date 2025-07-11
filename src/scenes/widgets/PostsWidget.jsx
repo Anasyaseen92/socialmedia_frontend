@@ -8,39 +8,27 @@ const PostsWidget = ({ userId, isProfile = false }) => {
   const posts = useSelector((state) => state.posts);
   const token = useSelector((state) => state.token);
 
-  const getPosts = async () => {
-    const response = await fetch("http://localhost:3001/posts", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const data = await response.json();
-    dispatch(setPosts({ posts: data }));
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const url = isProfile
+          ? `http://localhost:3001/posts/${userId}/posts`
+          : "http://localhost:3001/posts";
 
-  const getUserPosts = async () => {
-    const response = await fetch(
-      `http://localhost:3001/posts/${userId}/posts`,
-      {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
+        const response = await fetch(url, {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const data = await response.json();
+        dispatch(setPosts({ posts: data }));
+      } catch (err) {
+        console.error("❌ Error fetching posts:", err.message);
       }
-    );
-    const data = await response.json();
-    dispatch(setPosts({ posts: data }));
-  };
+    };
 
-  // ✅ This useEffect runs once when the component mounts
- useEffect(() => {
-  const fetchData = async () => {
-    if (isProfile) {
-      await getUserPosts();
-    } else {
-      await getPosts();
-    }
-  };
-  fetchData();
-}, [isProfile, userId, token, getUserPosts, getPosts]);
- // ✅ include all necessary dependencies
+    fetchData();
+  }, [isProfile, userId, token, dispatch]); // ✅ all required dependencies
 
   return (
     <>

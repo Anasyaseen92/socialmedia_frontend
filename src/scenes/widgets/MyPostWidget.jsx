@@ -44,7 +44,7 @@ const MyPostWidget = ({ picturePath }) => {
     if (image) {
       const fileName = `${Date.now()}-${image.name}`;
 
-      const { data, error } = await supabase.storage
+      const {  error } = await supabase.storage
         .from("posts")
         .upload(fileName, image, {
           cacheControl: "3600",

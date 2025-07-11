@@ -26,7 +26,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [getUser]);
 
   if (!user) return null;
 
