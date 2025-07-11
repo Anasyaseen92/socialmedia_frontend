@@ -34,7 +34,7 @@ const getFriends = async () => {
 
   useEffect(() => {
     getFriends();
-  }, [userId]);
+  }, [getFriends]);
 
   return (
     <WidgetWrapper>

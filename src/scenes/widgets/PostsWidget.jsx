@@ -30,17 +30,17 @@ const PostsWidget = ({ userId, isProfile = false }) => {
   };
 
   // ✅ This useEffect runs once when the component mounts
-  useEffect(() => {
-    const fetchData = async () => {
-      if (isProfile) {
-        await getUserPosts();
-      } else {
-        await getPosts();
-      }
-    };
-
-    fetchData(); // 👈 call the function
-  }, [isProfile, userId, token]); // ✅ include all necessary dependencies
+ useEffect(() => {
+  const fetchData = async () => {
+    if (isProfile) {
+      await getUserPosts();
+    } else {
+      await getPosts();
+    }
+  };
+  fetchData();
+}, [isProfile, userId, token, getUserPosts, getPosts]);
+ // ✅ include all necessary dependencies
 
   return (
     <>

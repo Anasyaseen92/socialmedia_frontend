@@ -29,7 +29,7 @@ const Navbar = () => {
   const [isMobileMenuToggled, setMobileMenuToggled] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
+ // const user = useSelector((state) => state.user);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
   const theme = useTheme();
@@ -76,7 +76,7 @@ const Navbar = () => {
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
           <IconButton onClick={() => dispatch(setMode())}>
-            {theme.palette.mode == "dark" ? (
+            {theme.palette.mode === "dark" ? (
               <LightMode sx={{ fontSize: "25px" }} />
             ) : (
               <DarkMode sx={{ color: dark, fontSize: "25px" }} />
@@ -139,7 +139,7 @@ const Navbar = () => {
           {/*MENU ITEMS*/}
           <FlexBetween display="flex" gap="3rem" justifyContent="center" alignItems="center" flexDirection="column">
           <IconButton onClick={() => dispatch(setMode())}>
-            {theme.palette.mode == "dark" ? (
+            {theme.palette.mode === "dark" ? (
               <LightMode sx={{ fontSize: "25px" }} />
             ) : (
               <DarkMode sx={{ color: dark, fontSize: "25px" }} />
