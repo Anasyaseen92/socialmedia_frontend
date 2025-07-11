@@ -42,7 +42,7 @@ const PostWidget = ({
 
   const patchLike = async () => {
     const response = await fetch(
-      `http://localhost:3001/posts/${postId}/like`,
+      `https://socialmedia-backend-9nw8.vercel.app/posts/${postId}/like`,
       {
         method: "PATCH",
         headers: {
@@ -69,7 +69,7 @@ const PostWidget = ({
         {description}
       </Typography>
 
-      {picturePath && picturePath.startsWith("http") && (
+      {picturePath && picturePath.startsWith("https") && (
         <img
           src={picturePath}
           alt="post"

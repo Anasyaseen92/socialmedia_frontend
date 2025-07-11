@@ -24,7 +24,7 @@ const UserWidget = ({ userId, picturePath }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/users/${userId}`, {
+        const response = await fetch(`https://socialmedia-backend-9nw8.vercel.app/users/${userId}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,

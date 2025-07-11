@@ -89,9 +89,9 @@ const Form = () => {
       occupation: values.occupation,
       picturePath: publicUrl, // ✅ Supabase public image URL
     };
-      console.log("formData:", formData);
+     // console.log("formData:", formData);
 
-    const response = await fetch("http://localhost:3001/auth/register", {
+    const response = await fetch("https://socialmedia-backend-9nw8.vercel.app/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
@@ -107,7 +107,7 @@ const Form = () => {
 
   // ------------------- LOGIN ---------------------
   const login = async (values, onSubmitProps) => {
-    const response = await fetch("http://localhost:3001/auth/login", {
+    const response = await fetch("https://socialmedia-backend-9nw8.vercel.app/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),

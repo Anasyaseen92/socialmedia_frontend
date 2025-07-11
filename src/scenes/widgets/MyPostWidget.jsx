@@ -65,7 +65,7 @@ const MyPostWidget = ({ picturePath }) => {
     }
 
     // ✅ Send post with correct picturePath and description
-    const response = await fetch("http://localhost:3001/posts", {
+    const response = await fetch("https://socialmedia-backend-9nw8.vercel.app/posts", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

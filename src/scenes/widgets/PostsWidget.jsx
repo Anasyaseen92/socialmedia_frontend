@@ -12,8 +12,8 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     const fetchData = async () => {
       try {
         const url = isProfile
-          ? `http://localhost:3001/posts/${userId}/posts`
-          : "http://localhost:3001/posts";
+          ? `https://socialmedia-backend-9nw8.vercel.app/posts/${userId}/posts`
+          : "https://socialmedia-backend-9nw8.vercel.app/posts";
 
         const response = await fetch(url, {
           method: "GET",
