@@ -9,24 +9,32 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const ProfilePage = () => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const { userId } = useParams();
   const token = useSelector((state) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
-  const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/${userId}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    const data = await response.json();
-    setUser(data);
-  };
-
   useEffect(() => {
+    const getUser = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/users/${userId}`, {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user");
+        }
+
+        const data = await response.json();
+        setUser(data);
+      } catch (err) {
+        console.error("❌ Error loading user:", err.message);
+      }
+    };
+
     getUser();
-  }, [getUser]);
+  }, [userId, token]); // ✅ Correct dependencies
 
   if (!user) return null;
 
@@ -42,7 +50,7 @@ const ProfilePage = () => {
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
           <UserWidget userId={userId} picturePath={user.picturePath} />
-          <Box m="2rem 0"/>
+          <Box m="2rem 0" />
           <FriendListWidget userId={userId} />
         </Box>
 
@@ -51,11 +59,9 @@ const ProfilePage = () => {
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <MyPostWidget picturePath={user.picturePath} />
-          <Box m="2rem 0"/>
-
+          <Box m="2rem 0" />
           <PostsWidget userId={userId} isProfile />
         </Box>
-
       </Box>
     </Box>
   );
