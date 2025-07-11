@@ -14,23 +14,10 @@ const ProfilePage = () => {
   const token = useSelector((state) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
-
-  const getUser = async () => {
-    const response = await fetch(`https://socialmedia-backend-9nw8.vercel.app/users/${userId}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    const data = await response.json();
-    setUser(data);
-  };
-
-
-
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/users/${userId}`, {
+        const response = await fetch(`https://socialmedia-backend-9nw8.vercel.app/users/${userId}`, {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -47,7 +34,7 @@ const ProfilePage = () => {
     };
 
     getUser();
-  }, [userId, token]); // ✅ Correct dependencies
+  }, [userId, token]);
 
   if (!user) return null;
 
